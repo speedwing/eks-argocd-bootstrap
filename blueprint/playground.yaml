@@ -1,0 +1,42 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eks-playground
+  region: eu-west-1
+  version: "1.14"
+
+
+iam:
+  withOIDC: true
+  serviceAccounts:
+    - metadata:
+        name: cluster-autoscaler-aws-cluster-autoscaler
+        namespace: kube-system
+        labels: {aws-usage: "cluster-ops"}
+      attachPolicy: # inline policy can be defined along with `attachPolicyARNs`
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - "autoscaling:DescribeAutoScalingGroups"
+              - "autoscaling:DescribeAutoScalingInstances"
+              - "autoscaling:DescribeLaunchConfigurations"
+              - "autoscaling:DescribeTags"
+              - "autoscaling:SetDesiredCapacity"
+              - "autoscaling:TerminateInstanceInAutoScalingGroup"
+              - "ec2:DescribeLaunchTemplateVersions"
+            Resource: '*'
+
+nodeGroups:
+  - name: workers
+    labels:
+      role: workers
+    tags:
+      k8s.io/cluster-autoscaler/enabled: "1"
+      k8s.io/cluster-autoscaler/eks-playground: "1"
+    instanceType: m5.xlarge
+    minSize: 1
+    maxSize: 5
+    # privateNetworking: true

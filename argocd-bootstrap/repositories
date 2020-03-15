@@ -1,0 +1,4 @@
+- url: https://github.com/helm/charts.git
+- url: https://github.com/speedwing/eks-argocd-bootstrap.git
+- url: https://github.com/argoproj/argo-rollouts.git
+- url: https://github.com/istio/istio.git

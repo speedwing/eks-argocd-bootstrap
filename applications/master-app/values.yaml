@@ -1,0 +1,7 @@
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+
+cluster:
+  name: "no-name"
+  awsRegion: "us-east-1"

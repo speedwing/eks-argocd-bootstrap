@@ -1,0 +1,4 @@
+admissionregistration.k8s.io/MutatingWebhookConfiguration:
+  ignoreDifferences: |
+    jsonPointers:
+    - /webhooks/0/clientConfig/caBundle

@@ -1,0 +1,5 @@
+cluster:
+  name: "eks-playground"
+  awsRegion: "eu-west-1"
+  clusterAutoscaler:
+    namespace: "kube-system"
