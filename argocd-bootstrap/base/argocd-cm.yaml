@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+data:
+  repositories: |
+    - url: https://github.com/helm/charts.git
+    - url: https://github.com/speedwing/eks-argocd-bootstrap.git
+    - url: https://github.com/argoproj/argo-rollouts.git
+    - url: https://github.com/istio/istio.git
+  resource.customizations: |
+    admissionregistration.k8s.io/MutatingWebhookConfiguration:
+      ignoreDifferences: |
+        jsonPointers:
+        - /webhooks/0/clientConfig/caBundle
