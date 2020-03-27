@@ -8,3 +8,7 @@ spec:
   addonComponents:
     prometheus:
       enabled: false
+  values:
+    global:
+      k8sIngress:
+        enabled: false

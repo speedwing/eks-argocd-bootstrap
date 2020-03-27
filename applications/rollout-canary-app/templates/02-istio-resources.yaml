@@ -1,0 +1,48 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: rollout-canary-kube
+  labels:
+    app.kubernetes.io/name: applications.argoproj.io
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/managed-by: Tiller
+  annotations:
+    kubernetes.io/ingress.class: "ingressgateway"
+    kubernetes.io/ingress.tld: "flo.pub"
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP2
+      hosts:
+        - "rollout-canary.kube"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: rollout-canary-vs
+  labels:
+    app.kubernetes.io/name: applications.argoproj.io
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/managed-by: Tiller
+spec:
+  hosts:
+  - rollout-canary.kube
+  gateways:
+    - rollout-canary-kube
+  http:
+    - name: primary
+      route:
+        - destination:
+            host: rollout-canary-stable
+          weight: 100
+        - destination:
+            host: rollout-canary
+          weight: 0
+

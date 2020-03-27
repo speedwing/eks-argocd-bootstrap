@@ -13,3 +13,17 @@ data:
       ignoreDifferences: |
         jsonPointers:
         - /webhooks/0/clientConfig/caBundle
+    install.istio.io/IstioOperator:
+      health.lua: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.status == "HEALTHY" then
+            hs.status = "Healthy"
+            hs.message = "IstioOperator Ready"
+            return hs
+          end
+        end
+
+        hs.status = "Progressing"
+        hs.message = "Waiting for IstioOperator"
+        return hs

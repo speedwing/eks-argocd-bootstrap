@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: master-app
+  name: rollout-canary-app
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,13 +10,11 @@ spec:
   source:
     repoURL: https://github.com/speedwing/eks-argocd-bootstrap.git
     targetRevision: HEAD
-    path: applications/master-app
-    helm:
-      valueFiles:
-        - values-playground.yaml
+    path: applications/rollout-canary-app
+
   destination:
-    namespace: argocd
-    server: https://kubernetes.default.svc
+    namespace: production
+    server: {{ .Values.spec.destination.server }}
 
   syncPolicy:
     automated:

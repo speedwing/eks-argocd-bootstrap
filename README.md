@@ -25,7 +25,7 @@ The project structure should be similar to this:
     └── playground.yaml
 ``` 
 
-The `blueprint` folder\ contains the specifications for an Eks Cluster.
+The `blueprint` folder contains the specifications for an Eks Cluster.
 The `argocd-bootstrap` folder contains the `kustomization` required to install ArgoCD and bootstrap the cluster. It also
 contains the `master-app.yaml` file that is nothing else than the app-of-apps responsible for installing all the _other_ kubernetes manifests.
 `applications` is the folder that contains the `master-app` itself plus all the other apps that you might want to install on your cluster.

@@ -1,0 +1,40 @@
+# This example demonstrates a Rollout using the canary update strategy with a customized rollout
+# plan. The prescribed steps initially sets a canary weight of 20%, then pauses indefinitely. Once
+# resumed, the rollout performs a gradual, automated 20% weight increase until it reaches 100%.
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: rollout-canary
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: rollout-canary
+  template:
+    metadata:
+      labels:
+        app: rollout-canary
+    spec:
+      containers:
+        - name: rollouts-demo
+          image: {{ .Values.image }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+  strategy:
+    canary:
+      steps:
+        - setWeight: 5
+        - pause: {}
+        - setWeight: 50
+        - pause:
+            duration: 60
+      canaryService: rollout-canary # required
+      stableService: rollout-canary-stable  # required
+      trafficRouting:
+        istio:
+          virtualService:
+            name: rollout-canary-vs  # required
+            routes:
+              - primary # At least one route is required

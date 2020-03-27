@@ -12,7 +12,7 @@ spec:
         name: http
         protocol: HTTP2
       hosts:
-        - "argocd.dev"
+        - "argocd.kube"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -20,10 +20,12 @@ metadata:
   name: argocd-server
 spec:
   hosts:
-  - argocd.dev
+  - argocd.kube
   gateways:
     - argocd-gateway
   http:
     - route:
         - destination:
             host: argocd-server.argocd.svc.cluster.local
+            port:
+              number: 80

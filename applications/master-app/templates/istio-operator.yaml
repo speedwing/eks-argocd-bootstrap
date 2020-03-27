@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-operator
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/istio/istio.git
+    targetRevision: "1.5.1"
+    path: operator/data/operator-chart
+
+    helm:
+      parameters:
+        - name: "hub"
+          value: "docker.io/istio"
+        - name: "tag"
+          value: "1.5.1"
+        - name: "operatorNamespace"
+          value: "istio-operator"
+        - name: "istioNamespace"
+          value: "istio-system"
+
+  destination:
+    namespace: istio-operator
+    server: {{ .Values.spec.destination.server }}
+
+  syncPolicy:
+    automated:
+      prune: true
