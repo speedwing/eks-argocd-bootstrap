@@ -13,6 +13,17 @@ spec:
         protocol: HTTP2
       hosts:
         - "argocd.kube"
+# Uncomment below to enable HTTPS
+#      tls:
+#        httpsRedirect: true
+#    - port:
+#        number: 443
+#        name: https
+#        protocol: HTTP2
+#      hosts:
+#        - "argocd.kube"
+#      tls:
+#        mode: PASSTHROUGH
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
