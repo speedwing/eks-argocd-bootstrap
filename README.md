@@ -1,5 +1,7 @@
 # eks-argocd-bootstrap
 
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R5R51LJWE)
+
 In this project you will find an example of how to create and bootstrap and EKS cluster with ArgoCD.
 
 Leveraging the ArgoCD concept of [App of Apps](https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#app-of-apps),
