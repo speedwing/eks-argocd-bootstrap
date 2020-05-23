@@ -21,7 +21,6 @@ spec:
         protocol: HTTP
       hosts:
         - "rollout-canary.kube"
-        - "rollout-canary.local"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService

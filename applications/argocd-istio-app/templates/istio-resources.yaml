@@ -13,7 +13,6 @@ spec:
         protocol: HTTP
       hosts:
         - "argocd.kube"
-        - "argocd.local"
 # Uncomment below to enable HTTPS
 #      tls:
 #        httpsRedirect: true
