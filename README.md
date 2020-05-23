@@ -7,6 +7,8 @@ In this project you will find an example of how to create and bootstrap and EKS 
 Leveraging the ArgoCD concept of [App of Apps](https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#app-of-apps),
 you will be able to install a number of kubernetes manifests quickly, safely and repeatedly.
 
+Read more on my blog: [Bootstrap a kubernetes cluster with ArgoCD and Istio](https://nemo83.dev/posts/argocd-istio-operator-bootstrap/)
+
 ## Project structure
 
 The project structure should be similar to this:
