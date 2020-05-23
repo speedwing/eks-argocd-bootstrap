@@ -18,7 +18,7 @@ spec:
     - port:
         number: 80
         name: http
-        protocol: HTTP2
+        protocol: HTTP
       hosts:
         - "rollout-canary.kube"
 ---

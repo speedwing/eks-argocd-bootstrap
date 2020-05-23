@@ -10,7 +10,7 @@ spec:
     - port:
         number: 80
         name: http
-        protocol: HTTP2
+        protocol: HTTP
       hosts:
         - "argocd.kube"
 # Uncomment below to enable HTTPS
@@ -19,7 +19,7 @@ spec:
 #    - port:
 #        number: 443
 #        name: https
-#        protocol: HTTP2
+#        protocol: HTTPS
 #      hosts:
 #        - "argocd.kube"
 #      tls:

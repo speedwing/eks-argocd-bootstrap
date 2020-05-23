@@ -4,4 +4,4 @@ namespace: argocd
 bases:
   - ../base
 patchesStrategicMerge:
-  - argocd-server.yaml
+#  - argocd-server.yaml
