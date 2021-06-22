@@ -42,7 +42,7 @@ In order to create the cluster run:
 
 ## Bootstrap the cluster
 
-`kubectl apply -k argocd-bootstrap`
+`kubectl apply -k argocd-bootstrap/argocd-istio-bootstrap`
 
 If you then want to access ArgoCD via a load balancer you have to then issue:
 
